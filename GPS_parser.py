@@ -4,30 +4,49 @@ import os
 
 wd = os.getcwd()
 print('Reading dictionaries...')
-input_directory = wd + '/Input'
+input_directory = wd + '/Input'n
 
 for currentpath, folders, files in os.walk(input_directory):
 	for file in files:
 		input_file_path = input_directory + '/' + file
-		input_file = open(input_file_path, 'r', encoding="utf-8")
-		input_clean_2 = open(input_file_path, 'r', encoding="utf-8")
+		input_file = open(input_file_path, 'r', encoding = "utf-8")
+		input_clean_2 = open(input_file_path, 'r', encoding = "utf-8")
 
 		
 		input_file_name = input_file_path.split('/')
 		#print(input_file_name[-1])
 
-		input_fasta = wd + '/Output/' + input_file_name[-1] + "_output_clean.txt"
+		input_fasta = wd
+                + '/Output/'
+                + input_file_name[-1]
+                + "_output_clean.txt"
 		
-		output_clean = wd + '/Output/' + input_file_name[-1] + "_output_clean.txt"
+		output_clean = wd
+                + '/Output/'
+                + input_file_name[-1]
+                + "_output_clean.txt"
+                
 		output_txt = open(output_clean, 'w')
 		
-		output_clean_table = wd + '/Output/' + input_file_name[-1] + '_output_clean_table.csv'
+		output_clean_table = wd
+                + '/Output/'
+                + input_file_name[-1]
+                + '_output_clean_table.csv'
+                
 		output_csv = open(output_clean_table, 'w')
 
-		output_fasta_header = wd + '/Output/' + input_file_name[-1] + '_output_fasta_header.txt'
+		output_fasta_header = wd
+                + '/Output/'
+                + input_file_name[-1]
+                + '_output_fasta_header.txt'
+                
 		output_header = open(output_fasta_header, 'w')
 
-		output_ID_path = wd + '/Output/' + input_file_name[-1] + '_output_ID.txt'
+		output_ID_path = wd
+                + '/Output/'
+                + input_file_name[-1]
+                + '_output_ID.txt'
+                
 		output_ID = open(output_ID_path, 'w')
 
 		current_seq = ''
@@ -45,8 +64,12 @@ for currentpath, folders, files in os.walk(input_directory):
 			output_txt.write(current_header + current_seq)
 
 
-		input_fasta_file = wd + '/Output/' + input_file_name[-1] + "_output_clean.txt"
-		input_fasta = open(input_fasta_file, 'r', encoding="utf-8")
+		input_fasta_file = wd
+                + '/Output/'
+                + input_file_name[-1]
+                + "_output_clean.txt"
+                
+		input_fasta = open(input_fasta_file, 'r', encodifng = "utf-8")
 		header = ''
 
 		#create a file with only the Solycs for header only file
@@ -71,11 +94,12 @@ for currentpath, folders, files in os.walk(input_directory):
 		cutoff = ''
 		cluster = ''
 		results_line_output = ''
+                
 		for line in input_clean_2:
 			if line.startswith('>'):
 				output_csv.write(results_line_output)
 				#print(results_line_output)
-				gene_ID = str(line[1:-1])
+				gene_ID = str(line[1:19])
 				position = ''
 				peptide = ''
 				score = ''
@@ -88,13 +112,19 @@ for currentpath, folders, files in os.walk(input_directory):
 				score += '|' + results[2]
 				cutoff += '|' + results[3]
 				cluster += '|' + results[4].rstrip('\n').replace('Cluster ', '')
-				results_line_output = (gene_ID +'\t' + 
-										position +'|\t' + 
-										peptide + '|\t' +
-										score + '|\t' +
-										cutoff + '|\t' +
-										cluster + '|\n')
-        
+				results_line_output = (gene_ID +'\t'
+                                               + position +'|\t'
+                                               + peptide + '|\t'
+                                               + score + '|\t'
+                                               + cutoff + '|\t'
+                                               + cluster + '|\n')
+			else:
+				output_csv.write('Gene' + '\t'
+                                        + 'Position' + '\t'
+                                        + 'Pepitide' + '\t'
+                                        + 'Score' + '\t'
+                                        + 'Cutoff' + '\t'
+                                        + 'Cluster' + '\n')        
         
 
 
