@@ -124,7 +124,4 @@ for currentpath, folders, files in os.walk(input_directory):
                                         + 'Pepitide' + '\t'
                                         + 'Score' + '\t'
                                         + 'Cutoff' + '\t'
-                                        + 'Cluster' + '\n')        
-        
-
-
+                                        + 'Cluster' + '\n')
